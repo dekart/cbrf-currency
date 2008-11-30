@@ -19,7 +19,7 @@ module CBRF
 
         currency = CBRF::Currency.new(row)
         
-        @currencies[currency.symbol.to_s.downcase] = currency
+        @currencies[currency.symbol] = currency
       end
     end
   end
