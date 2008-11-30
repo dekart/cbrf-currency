@@ -7,7 +7,7 @@ module CBRF
 
       @code   = cells[0].inner_text.strip.to_i
       @units  = cells[2].inner_text.strip.to_i
-      @name   = cells[3].inner_text.strip.mb_chars[2..-1]
+      @name   = cells[3].inner_text.strip.chars[2..-1]
       @rate   = cells[4].inner_text.strip.sub(",", ".").to_f
 
       # Fix for HTML markup bugs
