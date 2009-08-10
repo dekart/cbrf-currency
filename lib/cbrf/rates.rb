@@ -10,15 +10,13 @@ module CBRF
     def self.for(date)
       url = "http://www.cbr.ru/currency_base/D_print.aspx?date_req=#{date.strftime('%d/%m/%Y')}"
 
-      if cache.is_a?(MemCache) and cached_rates = cache.get("cbrf_currency_#{ date }")
-        return cached_rates
-      else
+      unless cache.is_a?(MemCache) and rates = cache.get("cbrf_currency_#{ date }")
         rates = new(Hpricot(open(url)))
 
-        cache.set("cbrf_currency_#{ date }", rates, 1.day) if cache.is_a?(MemCache)
-
-        return rates
+        cache.set("cbrf_currency_#{ date }", rates, 1.day) if cache.is_a?(MemCache) and rates.currencies.any?
       end
+
+      rates
     end
 
     def initialize(document)
