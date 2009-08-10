@@ -24,7 +24,7 @@ module CBRF
     def initialize(document)
       @currencies = HashWithIndifferentAccess.new
       
-      (document / "table table table tr").each_with_index do |row, index|
+      (document / "table table tr").each_with_index do |row, index|
         next if index == 0
 
         currency = CBRF::Currency.new(row)
